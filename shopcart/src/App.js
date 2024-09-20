@@ -7,10 +7,7 @@ import DisplayProducts from "./components/displayProducts";
 const App = () => {
   return (
     <ProductsProvider>
-      <div>
-        <Navbar />
-        <DisplayProducts />
-      </div>
+      <DisplayProducts />
     </ProductsProvider>
   );
 };

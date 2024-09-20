@@ -1,4 +1,3 @@
-// products.js
 import React, { useState, useEffect } from "react";
 
 const ProductsContext = React.createContext();
@@ -14,10 +13,24 @@ const ProductsProvider = ({ children }) => {
   const [totalItems, setTotalItems] = useState(0);
 
   const handleQuantityChange = (item) => (event) => {
-    const value = parseInt(event.target.value) || 0;
+    const value = Math.max(0, parseInt(event.target.value) || 0); // Prevent negative quantities
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
       [item]: value,
+    }));
+  };
+
+  const incrementQuantity = (item) => {
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [item]: prevQuantities[item] + 1,
+    }));
+  };
+
+  const decrementQuantity = (item) => {
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [item]: Math.max(0, prevQuantities[item] - 1), // Prevent negative values
     }));
   };
 
@@ -31,7 +44,13 @@ const ProductsProvider = ({ children }) => {
 
   return (
     <ProductsContext.Provider
-      value={{ quantities, totalItems, handleQuantityChange }}
+      value={{
+        quantities,
+        totalItems,
+        handleQuantityChange,
+        incrementQuantity,
+        decrementQuantity,
+      }}
     >
       {children}
     </ProductsContext.Provider>

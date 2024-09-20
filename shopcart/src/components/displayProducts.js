@@ -1,5 +1,6 @@
 import React, { useState, useContext, createContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "./Navbar";
 
 // Context for managing product quantities
 const ProductsContext = createContext();
@@ -105,32 +106,6 @@ const Modal = ({ product, onClose }) => {
 };
 
 // Header Component
-const Header = () => {
-  const { totalItems } = useContext(ProductsContext);
-
-  return (
-    <div
-      style={{
-        backgroundColor: "cyan",
-        color: "black",
-        padding: "16px",
-        marginBottom: "16px",
-      }}
-    >
-      <div className="d-flex justify-content-between align-items-center">
-        <div>
-          <h1>Shop With React</h1>
-        </div>
-        <div className="p-1">
-          <span className="me-2">
-            <i className="fa fa-shopping-cart"></i>
-          </span>
-          {totalItems} items
-        </div>
-      </div>
-    </div>
-  );
-};
 
 // Display Products Component
 const DisplayProductsWithModal = () => {
@@ -186,7 +161,7 @@ const DisplayProductsWithModal = () => {
 
   return (
     <div>
-      <Header />
+      <Navbar />
       <main>
         {products.map((product) => (
           <div className="m-5" key={product.id}>

@@ -2,8 +2,13 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import FacebookLogin from 'react-facebook-login';
 
 const Navbar = ({ cartTotal }) => {
+  const responseFacebook = (response) => {
+    console.log(response); // Handle response
+  };
+
   return (
     <div className="row align-items-center" style={{ justifyContent: "space-between", padding: "10px 20px" }}>
       <div>
@@ -19,6 +24,14 @@ const Navbar = ({ cartTotal }) => {
             {cartTotal > 0 ? cartTotal : "0"} items
           </span>
         </Link>
+        <FacebookLogin
+          appId="YOUR_APP_ID"
+          autoLoad={false}
+          fields="name,email,picture"
+          callback={responseFacebook}
+          icon="fa-facebook"
+          cssClass="btn btn-primary ml-2"
+        />
       </div>
     </div>
   );
